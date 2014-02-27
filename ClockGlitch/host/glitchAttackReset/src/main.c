@@ -71,6 +71,7 @@ int main(void)
 	asm("subs	r6, 1");
 
 	asm("str	r1, [r0,#28]");		// Clock = 0
+	asm("str	r1, [r0,#28]");
 	asm("bne	LOOP_1");			// If counter=0, break the loop
 
 
@@ -100,11 +101,12 @@ int main(void)
 	asm("LOOP_WAITING_BUTTON2:");	// This loop generates a 15 MHz clock signal while PB2 is not pressed
 
 	asm("str	r1, [r0,#24]");		// Clock = 1
-	asm("str	r1, [r0,#24]");
+	//asm("str	r1, [r0,#24]");
 	asm("ldr	r2, [r3,#0x14]");	// Checks if PB2 is pressed (pin 11 - port 2)
 	asm("tst	r2, 0x800");
 
 
+	asm("str	r1, [r0,#28]");		// Clock = 0
 	asm("str	r1, [r0,#28]");		// Clock = 0
 	asm("bne	LOOP_WAITING_BUTTON2");		// If PB2 was not pressed, repeat the loop
 
